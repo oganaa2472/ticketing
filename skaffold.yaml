@@ -7,7 +7,7 @@ build:
   local:
     push: false
   artifacts:
-    - image: 80133765/auth
+    - image: rallycoding/auth
       context: auth
       docker:
         dockerfile: Dockerfile
@@ -15,7 +15,7 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
-    - image: 80133765/client
+    - image: rallycoding/ticketing-client
       context: client
       docker:
         dockerfile: Dockerfile
@@ -23,8 +23,32 @@ build:
         manual:
           - src: '**/*.js'
             dest: .
-    - image: 80133765/tickets
+    - image: rallycoding/tickets
       context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: rallycoding/orders
+      context: orders
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: rallycoding/expiration
+      context: expiration
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: rallycoding/payments
+      context: payments
       docker:
         dockerfile: Dockerfile
       sync:
